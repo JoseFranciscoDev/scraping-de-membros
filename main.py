@@ -7,17 +7,15 @@ def abrir_whatsapp():
     pg.press("WIN")
     pg.write("Whatsapp")
     pg.press("ENTER")
-    sleep(3)
+    sleep(1.5)
 
 
 def acessar_grupo():
     pg.click(x=297, y=116) # posição da barra de busca do whatsapp
     sleep(1)
     pg.write("IV congresso")
-    sleep(3)
-    for i in range(2):
-        print(i)
-        tab()
+    sleep(2)
+    tab(quantas_vezes=2)
     sleep(2)
     pg.press("ENTER")
     sleep(2)
@@ -43,17 +41,32 @@ def acessar_contato():
         pg.press("ENTER")
         pg.press("DOWN")
         pg.press("ENTER")
-        copiar_numero()
+        sleep(1)
+        copiar_contato()
         sleep(0.5)
 
   
-def copiar_numero():
-    posicao_comeco_do_numero = 1569, 312
-    posicao_final_do_numero =  1687, 314
-    pg.moveTo(posicao_comeco_do_numero)
-    pg.dragTo(posicao_final_do_numero, duration=1.0, button='left')
-    pg.hotkey('crtl', 'c')
-    print(pyperclip.paste())
+def copiar_contato():            
+    posicao_nome_do_contato = 1615, 274
+    posicao_numero_do_contato = 1600, 314 
+    pg.moveTo(posicao_nome_do_contato, duration=0.2)
+    
+    # 1. Triplo clique para selecionar o nome do contato
+    pg.tripleClick() 
+    
+    # 2. Copiar
+    pg.hotkey('ctrl', 'c')
+    nome_do_contato_copiado = pyperclip.paste()
+    print("nome=", nome_do_contato_copiado)
+    
+     # 1. Triplo clique para selecionar o numero do contato
+    pg.moveTo(posicao_numero_do_contato, duration=0.2)
+    pg.tripleClick() 
+    
+    # 2. Copiar
+    pg.hotkey('ctrl', 'c')
+    numero_do_contato_copiado = pyperclip.paste()
+    print("numero=", numero_do_contato_copiado)
     
     
 def main():
